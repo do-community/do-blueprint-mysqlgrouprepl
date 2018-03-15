@@ -1,0 +1,33 @@
+---
+# What to configure
+mysql_upstream_package: true
+mysql_group_replication: true
+mysql_proxysql_backend_config: true
+mysql_group_replication_multi_primary: "{{ shared_multi_primary }}"
+
+# Transport security
+mysql_repl_require_ssl: "{{ shared_require_ssl }}"
+mysql_private_networking: "{{ shared_private_networking }}"
+
+# Credentials
+mysql_root_pass: sammytheshark
+
+mysql_repl_user: repl
+mysql_repl_pass: replpassword
+
+# Databases to create
+mysql_databases:
+  - name: "{{ shared_test_db }}"
+    datafile: "{{ shared_test_db }}.sql"
+
+# Users to create
+mysql_users:
+  - name: "{{ shared_test_user }}"
+    password: "{{ shared_test_pass }}"
+    priv: "{{ shared_test_db }}.*:ALL"
+    host: "%"
+
+  - name: "{{ shared_proxysql_monitor_user }}"
+    password: "{{ shared_proxysql_monitor_pass }}"
+    priv: "sys.*:SELECT"
+    host: "%"

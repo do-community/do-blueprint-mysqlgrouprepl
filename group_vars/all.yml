@@ -1,0 +1,19 @@
+---
+# Credentials
+shared_proxysql_monitor_user: monitor
+shared_proxysql_monitor_pass: monitorpassword
+
+shared_test_user: playgrounduser
+shared_test_pass: playgroundpassword
+shared_test_db: playground
+
+# Transport security
+shared_require_ssl: true
+shared_private_networking: true
+
+# Configuration
+
+## Multi-primary deploysments have some additional limitations.
+## Read more here before changing:
+##   https://dev.mysql.com/doc/refman/5.7/en/group-replication-limitations.html
+shared_multi_primary: false

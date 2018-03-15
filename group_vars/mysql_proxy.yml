@@ -1,0 +1,30 @@
+---
+# What to configure
+proxysql_multi_primary: "{{ shared_multi_primary }}"
+proxysql_mysql_backend_servers: "{{ groups['mysql_nodes'] }}"
+
+# Transport security
+proxysql_require_ssl: "{{ shared_require_ssl }}"
+proxysql_private_networking: "{{ shared_private_networking }}"
+
+# Internal credentials
+proxysql_admin_user: admin
+proxysql_admin_password: admin
+
+proxysql_mysql_monitor_username: "{{ shared_proxysql_monitor_user }}"
+proxysql_mysql_monitor_password: "{{ shared_proxysql_monitor_pass }}"
+
+# Client credentials to configure
+proxysql_user_data:
+    - user: "{{ proxysql_admin_user }}"
+      password: "{{ proxysql_admin_password }}"
+      filename: .my.cnf
+      port: "{{ proxysql_admin_port }}"
+      prompt: "ProxySQLAdmin> "
+
+    - user: "{{ shared_test_user }}"
+      password: "{{ shared_test_pass }}"
+      filename: "{{ shared_test_user }}.cnf"
+      port: "{{ proxysql_mysql_port }}"
+      default_hostgroup: 2
+      prompt: "{{ shared_test_user }}> "

@@ -1,0 +1,9 @@
+- src: https://github.com/do-community/ansible-role-mysql.git
+  scm: git
+  version: v0.1.0
+  name: mysql
+
+- src: https://github.com/do-community/ansible-role-proxysql.git
+  scm: git
+  version: v0.1.0
+  name: proxysql
