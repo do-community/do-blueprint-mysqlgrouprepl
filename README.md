@@ -100,6 +100,25 @@ The playbook will:
 * Initialize the `terraform` directory so that it's ready to use.
 * Install the Ansible roles needed to run the main playbook.
 
+Once the `setup.yml` playbook has finished, follow the instructions in the final output to complete the configuration.  Adjust the ownership of the generated SSH keys:
+
+```
+sudo chown $USER:$USER ~/.ssh/blueprint-id_rsa*
+```
+
+You can optionally add the key to your local SSH agent:
+
+```
+eval `ssh-agent`
+ssh-add ~/.ssh/blueprint-id_rsa
+```
+
+Otherwise, when SSHing into your Blueprint infrastructure, you will need to pass in the appropriate SSH key using the `-i` flag:
+
+```
+ssh -i ~/.ssh/blueprint-id_rsa <username>@<server_ip>
+```
+
 ### Create the Infrastructure
 
 Move into the `terraform` directory.  Adjust the `terraform.tfvars` and `main.tf` file if necessary (to adjust the number or size of your servers for instance).  When you are ready, create your infrastructure with `terraform apply`:
